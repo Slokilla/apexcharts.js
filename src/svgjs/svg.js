@@ -168,7 +168,7 @@
     hex: /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i,
 
     // Parse rgb value
-    rgb: /rgb\((\d+),(\d+),(\d+)\)/,
+    rgb: /rgb\((\d+(?:.\d+)),?(\d+(?:.\d+)),?(\d+(?:.\d+))\)/,
 
     // Parse reference id
     reference: /#([a-z0-9\-_]+)/i,

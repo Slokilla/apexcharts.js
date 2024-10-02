@@ -2793,8 +2793,13 @@
         if (anno.seriesIndex !== undefined && w.globals.barWidth && !this.annoCtx.invertAxis) {
           xP -= w.globals.barWidth / 2 * (w.globals.series.length - 1) - w.globals.barWidth * anno.seriesIndex;
         }
-        xP = Math.min(Math.max(xP, 0), w.globals.gridWidth);
-        clipped = xP === 0 || xP === w.globals.gridWidth;
+        if (xP > w.globals.gridWidth) {
+          xP = w.globals.gridWidth;
+          clipped = true;
+        } else if (xP < 0) {
+          xP = 0;
+          clipped = true;
+        }
         return {
           x: xP,
           clipped: clipped
@@ -13820,11 +13825,11 @@
       value: function setLegendWrapXY(offsetX, offsetY) {
         var w = this.w;
         var elLegendWrap = w.globals.dom.elLegendWrap;
-        var legendRect = elLegendWrap.getBoundingClientRect();
+        var legendHeight = elLegendWrap.clientHeight;
         var x = 0;
         var y = 0;
         if (w.config.legend.position === 'bottom') {
-          y = w.globals.svgHeight - legendRect.height - 5;
+          y = w.globals.svgHeight - Math.min(legendHeight, w.globals.svgHeight / 2) - 5;
         } else if (w.config.legend.position === 'top') {
           var dim = new Dimensions(this.ctx);
           var titleH = dim.dimHelpers.getTitleSubtitleCoords('title').height;
@@ -25654,7 +25659,7 @@
       // Parse hex value
       hex: /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i,
       // Parse rgb value
-      rgb: /rgb\((\d+),(\d+),(\d+)\)/,
+      rgb: /rgb\((\d+(?:.\d+)),?(\d+(?:.\d+)),?(\d+(?:.\d+))\)/,
       // Parse reference id
       reference: /#([a-z0-9\-_]+)/i,
       // splits a transformation chain
