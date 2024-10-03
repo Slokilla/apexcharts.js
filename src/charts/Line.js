@@ -447,6 +447,7 @@ class Line {
 
     if (w.config.stroke.show && !this.pointsChart) {
       let lineFill = null
+      console.log("je suis là les gars")
       if (type === 'line') {
         lineFill = fill.fillPath({
           seriesNumber: realIndex,

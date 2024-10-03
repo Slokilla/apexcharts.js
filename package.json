@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/apexcharts/apexcharts.js.git"
   },
-  "main": "dist/apexcharts.common.js",
+  "main": "dist/apexcharts.js",
   "unpkg": "dist/apexcharts.js",
   "jsdelivr": "dist/apexcharts.js",
   "typings": "types/apexcharts.d.ts",
